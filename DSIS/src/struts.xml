@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- <!DOCTYPE struts PUBLIC "-//Apache Software Founsdation//DTD Struts 
+	Configuration 2.0//EN" "http://struts.apache.org/dtds/struts-2.0.dtd"> -->
+   
+   
+ <!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN" "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<constant name="struts.mapper.action.prefix.enabled" value="true" />
+	<package name="shweta" extends="struts-default">
+		<action name="examdownload" class="sis.action.ExamScheduleAction"
+			method="examScheduleDownload">
+			<result name="exam-schedule" type="stream">
+				<param name="inputName">fileStream1</param>
+				<param name="contentType">application/pdf</param>
+				<param name="contentDisposition">filename="Examschedule.pdf"</param>
+			</result>
+		</action>
+		<action name="logout" class="sis.action.LogoutAction">
+			<result name="SUCCESS">/login.jsp</result>
+		</action>
+		<action name="selectsubject" class="sis.action.SelectSubject"
+			method="execute">
+			<result name="success">/CourseCatalog.jsp</result>
+		</action>
+		<action name="output" class="sis.action.SelectSubject" method="preview">
+			<result name="test-stream" type="stream">
+				<param name="inputName">fileStream</param>
+				<param name="contentType">application/pdf</param>
+				<param name="contentDisposition">filename="scn.pdf"</param>
+			</result>
+		</action>
+	</package>
+	<package name="default" extends="struts-default">
+		<action name="EditStudent" class="sis.action.GetStudentAction">
+			<interceptor-ref name="fileUpload">
+				<param name="allowedTypes">image/png,image/gif,image/jpeg</param>
+			</interceptor-ref>
+			<interceptor-ref name="defaultStack" />
+			<result name="ModifyStudent">/Student.jsp</result>
+			<result name="failure">/failure.jsp</result>
+		</action>
+		<action name="addNews" class="sis.action.AddNews" method="execute">
+			<result name="success">/AdminHome.jsp</result>
+			<result name="failure">/AddNews.jsp</result>
+		</action>
+		
+		<action name="addInterest" class="sis.action.AddInterest" method="execute">
+		<result name="success">/AddInterest.jsp</result>
+		<result name="failure">/AdminHome.jsp</result>
+		</action>
+		<action name="ShowInterest" class="sis.action.DisplayInterest" method="execute">
+		<result name="success">/AddInterest.jsp</result>
+		<result name="failure">/AdminHome.jsp</result>
+		</action>
+		<action name="AnnInterest" class="sis.action.DisplayInterest" method="abc">
+		<result name="success">/AddAnnouncement.jsp</result>
+		<result name="failure">/AdminHome.jsp</result>
+		</action>
+		<action name="testInterest" class="sis.action.DisplayInterest" method="test">
+		<result name="success">/NewFile.jsp</result>
+		<result name="failure">/AdminHome.jsp</result>
+		</action>
+		<action name="formtestInterest" class="sis.action.Testaction1" method="execute">
+		<result name="success">/NewFile.jsp</result>
+		<result name="failure">/AdminHome.jsp</result>
+		</action>
+		
+	</package>
+	<package name="default1" extends="struts-default">
+		<action name="UpdateStudent" class="sis.action.UpdateStudentAction">
+			<interceptor-ref name="fileUpload">
+				<param name="allowedTypes">image/png,image/gif,image/jpeg</param>
+			</interceptor-ref>
+			<interceptor-ref name="defaultStack" />
+			<result name="Success">/AdminHome.jsp</result>
+			<result name="failure">/error.jsp</result>
+		</action>
+		<action name="DeleteStudent" class="sis.action.DeleteStudentAction">
+			<interceptor-ref name="fileUpload">
+				<param name="allowedTypes">image/png,image/gif,image/jpeg</param>
+			</interceptor-ref>
+			<interceptor-ref name="defaultStack" />
+			<result name="Success">/GetDetail.jsp</result>
+			<result name="failure">/failure.jsp</result>
+		</action>
+		
+		<action name="GetDetail" class="sis.action.GetDetailAction">
+			<result name="Success">/GetDetail.jsp</result>
+		</action>
+		
+		<action name="AssignSubjectStudent" class="sis.action.AssignSubjectStudent">
+			<result name="Success">/AssignSubjectStudent.jsp</result>
+		</action>
+		
+		
+		<action name="AssignSubjectFaculty" class="sis.action.AssignSubjectFaculty">
+			<result name="Success">/AssignSubjectFaculty.jsp</result>
+		</action>
+		
+		
+		<action name="addAnnouncement" class="sis.action.AddAnnouncement"
+			method="execute">
+			<result name="success">/AddAnnouncement.jsp</result>
+			<result name="failure">/failure.jsp</result>
+		</action>
+
+		<action name="AssignSubjecttoFaculty" class="sis.action.AssignSubjectAction"
+			method="execute">
+			<result name="success">/AdminHome.jsp</result>
+			<result name="failure">/failure.jsp</result>
+		</action>
+		<action name="AssignSubjecttoStudent" class="sis.action.AssignSubjectAction"
+			method="studentAssign">
+			<result name="success">/AdminHome.jsp</result>
+			<result name="failure">/wrongenroll.jsp</result>
+			<result name="fail">/wrongenroll1.jsp</result>
+		</action>
+	</package>
+
+	<package name="default2" extends="struts-default">
+		<action name="EditFaculty" class="sis.action.EditFacultyAction">
+			<interceptor-ref name="fileUpload">
+				<param name="allowedTypes">image/png,image/gif,image/jpeg</param>
+			</interceptor-ref>
+			<interceptor-ref name="defaultStack" />
+			<result name="EditFaculty">/Faculty.jsp</result>
+			<result name="failure">/error.jsp</result>
+		</action>
+	</package>
+
+	<package name="default3" extends="struts-default">
+		<action name="UpdateFaculty" class="sis.action.UpdateFacultyAction">
+			<interceptor-ref name="fileUpload">
+				<param name="allowedTypes">image/png,image/gif,image/jpeg</param>
+			</interceptor-ref>
+			<interceptor-ref name="defaultStack" />
+			<result name="Success">/GetDetail.jsp</result>
+			<result name="failure">/failure.jsp</result>
+		</action>
+		<action name="DeleteFaculty" class="sis.action.DeleteFacultyAction">
+			<interceptor-ref name="fileUpload">
+				<param name="allowedTypes">image/png,image/gif,image/jpeg</param>
+			</interceptor-ref>
+			<interceptor-ref name="defaultStack" />
+			<result name="Success">/GetDetail.jsp</result>
+			<result name="failure">/failure.jsp</result>
+		</action>
+	</package>
+	   <constant name="struts.devMode" value="true" />
+	<package name="helloworld" extends="struts-default" namespace="/">
+		
+		<action name="hello1" class="sis.action.AddFacultyAction"
+			method="execute">
+			<result name="success">/AddFaculty.jsp</result>
+			<result name="error">/failure.jsp</result>
+		</action>
+		
+		<action name="hello" class="sis.action.AddStudentAction"
+			method="execute">
+			<interceptor-ref name="fileUpload">
+				<param name="allowedTypes">image/png,image/gif,image/jpeg</param>
+			</interceptor-ref>
+			<interceptor-ref name="defaultStack">
+			</interceptor-ref>
+			<result name="success">/AddStudent.jsp</result>
+			<result name="error">/failure.jsp</result>
+		</action>
+		
+		<action name="FinancialInsert" class="sis.action.FinancialInsert"
+			method="execute">
+			<result name="success">/FinancialInsert.jsp</result>
+			<result name="error">/failure.jsp</result>
+		</action>
+		
+		
+		
+		
+		<action name="library" class="sis.action.LibraryAdmin"
+			method="execute">
+			<result name="success">/LibraryAdmin.jsp</result>
+			<result name="error">/failure.jsp</result>
+		</action>
+		
+	</package>
+	<package name="Mujahid" extends="struts-default" namespace="/">
+		<action name="AddSubject" class="sis.action.AddSubjectAction">
+			<result name="Success">/AddSubject.jsp</result>
+			<result name="failure">/failure.jsp</result>
+		</action>
+	</package>
+	<package name="Gazal" extends="struts-default">
+		<action name="update" class="sis.action.UpdateGradesAction" method="execute">
+			<result name="success">/UpdateGrades.jsp</result>
+		</action>
+	</package>
+	<package name="search" extends="struts-default">
+		<action name="search" class="sis.action.UpdateGradesAction" method="search">
+			<result name="success">/UpdateGrades.jsp</result>
+		</action>
+		
+	</package>
+	<package name="student" extends="struts-default">
+		<action name="FetchStudentInfoAction" class="sis.action.FetchStudentInfoAction"
+			method="execute">
+			<result name="success">/success.jsp</result>
+		</action>
+		
+		
+		
+		<action name="UpdateStudentInfo" class="sis.action.UpdateStudentInfo" method="execute">
+		<result name="success">/successpage.jsp</result>
+		</action>
+		
+		<action name="input" class="sis.action.LoginAction" method="execute">
+			<result name="student">/StudentHome.jsp </result>
+			<result name="admin">/AdminHome.jsp</result>
+			<result name="failure">/login.jsp</result>
+		</action>
+		<action name="Financial" class="sis.action.Financial" method="execute">
+			<result name="data">/outputfinancial.jsp </result>
+		</action>
+		<action name="LibraryAction" class="sis.action.LibraryAction"
+			method="execute">
+			<result name="library">/library.jsp</result>
+		</action>
+		<action name="GradeAction" class="sis.action.GradeAction"
+			method="execute">
+			<result name="grade">/grade.jsp</result>
+		</action>
+
+	</package>
+	
+	
+	<package name="geetfriend" extends="struts-default">
+<action name="friend" class="sis.action.FriendAction" method="findfriend">
+			<result name="frnd">/Friend.jsp</result>
+		</action>
+		
+	  <action name="Addfriend" class="sis.action.FriendAction" method="Addfriend">
+			<result name="addedfrnd">/Friend.jsp</result>
+		</action>
+		<action name="testfriend" class="sis.action.FriendAction" method="Testfriend">
+			<result name="addedfrnd">/test2.jsp</result>
+		</action>
+		<action name="delfrnd" class="sis.action.FriendAction" method="delectFriend">
+			<result name="deleted">/Friend.jsp</result>
+		</action>
+		
+		<action name="showfriend" class="sis.action.FriendAction" method="FetchFrnd">
+		<interceptor-ref name="fileUpload">
+				<param name="allowedTypes">image/png,image/gif,image/jpeg</param>
+			</interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<result name="fetched">/showfriend.jsp</result>
+		</action>
+		<action name="searchfrnd" class="sis.action.FriendAction" method="SearchFriend">
+		<result name="searched">/Searchedfrnd.jsp</result>
+		</action>
+</package>
+	
+</struts>
